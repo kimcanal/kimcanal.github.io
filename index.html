@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>kimcanal | GitHub Portfolio</title>
@@ -140,7 +140,7 @@
       color: #7a7a7a;
       font-size: 1rem;
     }
-    /* 모바일 대응 */
+    /* Mobile Responsive */
     @media (max-width: 650px) {
       .container { padding: 16px;}
       .card-list { flex-direction: column; gap: 18px;}
@@ -149,48 +149,49 @@
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙 다크모드</button>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
   <div class="container">
     <header>
-      <img src="https://avatars.githubusercontent.com/kimcanal" alt="프로필 사진" class="profile-pic">
+      <img src="https://avatars.githubusercontent.com/kimcanal" alt="Profile picture" class="profile-pic">
       <h1>kimcanal</h1>
-      <span class="subtitle"> NOT Web Developer & NOT OSS Enthusiast</span>
+      <span class="subtitle">NOT Web Developer & NOT OSS Enthusiast</span>
     </header>
     <section>
-      <h2>👋 소개</h2>
+      <h2>👋 Introduction</h2>
       <p>
-        안녕하세요! <b>kimcanal</b>입니다.<br>
-        최신 웹 기술과 오픈소스 그리고 세상을 더 좋게 만드는 개발에 열정이 아직 없습니다.<br>
-        새로운 도전을 즐기고 싶으며, 성장하는 개발자가 될 수 있을까요?.
+        Hello! I'm <b>kimcanal</b>.<br>
+        I do NOT yet have passion for the latest web tech, open source, or making the world better with code.<br>
+        But I want to try new challenges. Can I grow as a developer?
       </p>
     </section>
     <section>
-      <h2>🚀 주요 프로젝트</h2>
+      <h2>🚀 Projects</h2>
       <ul class="card-list">
         <li class="card">
           <div class="card-title"><a href="https://github.com/kimcanal/project1">project1</a></div>
-          <div class="card-desc">공사중</div>
+          <div class="card-desc">Under Construction</div>
         </li>
         <li class="card">
           <div class="card-title"><a href="https://github.com/kimcanal/project2">project2</a></div>
-          <div class="card-desc">AI 기반 추천 시스템 구축 및 서비스 운영 을 해보고 싶어요</div>
+          <div class="card-desc">I'd like to build and operate an AI-based recommendation system</div>
         </li>
-        <!-- 더 많은 프로젝트를 여기에 추가하세요 -->
+        <!-- Add more projects here -->
       </ul>
     </section>
     <section>
-      <h2>💼 경력 & 기술</h2>
+      <h2>💼 Experience & Skills</h2>
       <ul class="info">
-        <li>이제 채워야겠죠?</li>
-        <li>이제 채워야겠죠?</li>
+        <li>🎓 Choong Ang High School (2017.3 - 2020.2)</li>
+        <li>✈️ ROK Air Force Special Intelligence Specialist (2022.4 - 2024.1) - Sergeant</li>
+        <li>📚 Sogang University (2021.3 - Present)</li>
       </ul>
     </section>
     <section>
-      <h2>📫 연락처 & 소셜</h2>
+      <h2>📫 Contact & Social</h2>
       <ul class="info">
         <li>Email: <a href="mailto:kenny31@sogang.ac.kr">kenny31@sogang.ac.kr</a></li>
         <li>GitHub: <a href="https://github.com/kimcanal" target="_blank">github.com/kimcanal</a></li>
-        <li>LinkedIn, Blog 등 요청시 추가 가능</li>
+        <li>LinkedIn, blog, etc. can be added upon request</li>
       </ul>
     </section>
   </div>
@@ -198,14 +199,14 @@
     &copy; 2025 kimcanal &middot; Powered by GitHub Pages
   </footer>
   <script>
-    // 테마 다크/라이트 토글
+    // Theme toggle (dark/light)
     function toggleTheme() {
       document.body.classList.toggle('dark');
       const btn = document.querySelector('.theme-toggle');
       if(document.body.classList.contains('dark')) {
-        btn.innerHTML = "☀️ 라이트모드";
+        btn.innerHTML = "☀️ Light Mode";
       } else {
-        btn.innerHTML = "🌙 다크모드";
+        btn.innerHTML = "🌙 Dark Mode";
       }
     }
   </script>
