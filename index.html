@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       /* Light Mode Variables */
@@ -20,8 +21,8 @@
       --primary: #3b82f6;
       --primary-glow: rgba(59, 130, 246, 0.5);
       --primary-dark: #2563eb;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -38,7 +39,11 @@
       --primary-dark: #3b82f6;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -90,8 +95,10 @@
         height: 140px !important;
         margin: 0 0 1.5rem 0 !important;
       }
-      
-      .subtitle { margin-bottom: 2rem !important; }
+
+      .subtitle {
+        margin-bottom: 2rem !important;
+      }
     }
 
     /* Header & Profile */
@@ -101,7 +108,11 @@
       transition: var(--transition);
     }
 
-    .profile-link { display: inline-block; cursor: pointer; position: relative; }
+    .profile-link {
+      display: inline-block;
+      cursor: pointer;
+      position: relative;
+    }
 
     .profile-pic {
       width: 130px;
@@ -182,7 +193,9 @@
     }
 
     /* Sections */
-    section { margin-bottom: 4rem; }
+    section {
+      margin-bottom: 4rem;
+    }
 
     h2 {
       font-size: 1.5rem;
@@ -193,14 +206,14 @@
       align-items: center;
       gap: 0.75rem;
     }
-    
-    h2 span { 
+
+    h2 span {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 2rem; 
-      height: 2rem; 
-      background: var(--surface); 
+      width: 2rem;
+      height: 2rem;
+      background: var(--surface);
       border-radius: 8px;
       border: 1px solid var(--border);
       font-size: 1.1rem;
@@ -247,29 +260,46 @@
       box-shadow: 0 10px 30px -10px var(--primary-glow);
     }
 
-    .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .card-title a { color: inherit; text-decoration: none; }
-    .card-title a::before { content: ''; position: absolute; inset: 0; z-index: 1; }
-    
-    .card-desc { 
-      color: var(--text-secondary); 
-      font-size: 0.95rem; 
-      margin-bottom: 1.5rem; 
-      flex-grow: 1; 
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .card-title a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .card-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
       line-height: 1.6;
     }
 
-    .play-link { 
-      color: var(--primary); 
-      font-weight: 600; 
-      font-size: 0.9rem; 
+    .play-link {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
       z-index: 2;
       position: relative;
     }
-    .play-link:hover { text-decoration: underline; }
+
+    .play-link:hover {
+      text-decoration: underline;
+    }
 
     /* Timeline */
     .timeline {
@@ -284,7 +314,10 @@
       padding-bottom: 2.5rem;
       padding-left: 1.5rem;
     }
-    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
 
     .timeline-marker {
       position: absolute;
@@ -302,7 +335,7 @@
       z-index: 1;
       transition: var(--transition);
     }
-    
+
     .timeline-item:hover .timeline-marker {
       border-color: var(--primary);
       box-shadow: 0 0 0 4px var(--primary-glow);
@@ -310,9 +343,9 @@
     }
 
     /* Experience Links Style */
-    .timeline-content h3 { 
-      font-size: 1.15rem; 
-      font-weight: 700; 
+    .timeline-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
       margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
@@ -326,7 +359,7 @@
       gap: 0.4rem;
       transition: color 0.2s;
     }
-    
+
     .exp-link:hover {
       color: var(--primary);
       text-decoration: underline;
@@ -341,7 +374,7 @@
       transition: opacity 0.2s;
       transform: translateY(1px);
     }
-    
+
     .exp-link:hover .exp-icon {
       opacity: 1;
       color: var(--primary);
@@ -359,7 +392,11 @@
       padding: 2px 8px;
       border-radius: 4px;
     }
-    .timeline-desc { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .timeline-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
 
     /* Theme Toggle */
     .theme-toggle {
@@ -381,8 +418,9 @@
       transition: var(--transition);
       z-index: 1000;
     }
-    .theme-toggle:hover { 
-      transform: rotate(15deg) scale(1.1); 
+
+    .theme-toggle:hover {
+      transform: rotate(15deg) scale(1.1);
       border-color: var(--primary);
     }
 
@@ -411,10 +449,11 @@
       justify-content: center;
       gap: 8px;
     }
-    #toast.show { 
-      visibility: visible; 
-      opacity: 1; 
-      transform: translateX(-50%) translateY(0); 
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     footer {
@@ -427,20 +466,36 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    
+
     main section {
       animation: fadeUp 0.6s ease-out forwards;
       opacity: 0;
     }
-    main section:nth-child(1) { animation-delay: 0.1s; }
-    main section:nth-child(2) { animation-delay: 0.2s; }
-    main section:nth-child(3) { animation-delay: 0.3s; }
 
+    main section:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    main section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    main section:nth-child(3) {
+      animation-delay: 0.3s;
+    }
   </style>
 </head>
+
 <body>
 
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode" title="Toggle Theme">
@@ -449,27 +504,36 @@
 
   <div class="container">
     <div class="layout-grid">
-      
+
       <header>
         <a href="https://github.com/kimcanal" target="_blank" class="profile-link">
           <img src="https://avatars.githubusercontent.com/kimcanal" alt="kimcanal" class="profile-pic">
         </a>
         <h1>kimcanal</h1>
-        <div class="subtitle">Not a Web Developer &<br>Not an OSS Enthusiast (yet)</div>
-        
-        <div class="header-contact">          
+        <div class="subtitle">Dunno know what2do<br>Not an OS Enthusiast (yet)</div>
+
+        <div class="header-contact">
           <a href="https://github.com/kimcanal" target="_blank" class="contact-row">
-            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
             <span>Github</span>
           </a>
 
           <a href="https://www.linkedin.com/in/kimcanal" target="_blank" class="contact-row">
-            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
             <span>LinkedIn</span>
           </a>
 
           <button class="contact-row" onclick="copyEmail()" title="Click to copy email">
-            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
             <span>kenny31@sogang.ac.kr</span>
           </button>
         </div>
@@ -480,8 +544,9 @@
           <h2><span>👋</span> About Me</h2>
           <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7;">
             Hi, I'm <a href="https://github.com/kimcanal" target="_blank" class="about-link">kimcanal</a>.<br>
-            I don't have a burning passion for the latest web tech, open source, or changing the world with code — yet.<br>
-            But I'm ready to take on new challenges. Can I grow into a real developer?
+            I'm interested in system programming, backend development, and building practical services that people can
+            actually use.<br>
+            Currently exploring operating systems, networking, and server-side development.
           </p>
         </section>
 
@@ -497,7 +562,9 @@
               </div>
               <a href="https://app.yatch-game.cloud/" target="_blank" class="play-link">
                 Play now
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </a>
             </li>
             <li class="card">
@@ -505,7 +572,7 @@
                 <a href="https://github.com/kimcanal/Sogang-Univ---Pintos-Project" target="_blank">Pintos Project</a>
               </div>
               <div class="card-desc">
-                Pintos project for Operation System(CSE4070) class in Sogang, 2025 (Grade: A-)
+                Pintos project for<br> Operation System(CSE4070) class in Sogang Univ, 2025 <br>(Grade: A-)
               </div>
             </li>
           </ul>
@@ -516,7 +583,10 @@
           <ul class="timeline">
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img src="https://yt3.googleusercontent.com/Z-eSy9ZnimMdAW-pm2Bgz63hXQGmjCaMqyH1IJ7_DpdwV4XJPkRJf3_HXJlhbPplkY7cv672Aw=s160-c-k-c0x00ffffff-no-rj" alt="Sogang University Logo" style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
+                <img
+                  src="https://yt3.googleusercontent.com/Z-eSy9ZnimMdAW-pm2Bgz63hXQGmjCaMqyH1IJ7_DpdwV4XJPkRJf3_HXJlhbPplkY7cv672Aw=s160-c-k-c0x00ffffff-no-rj"
+                  alt="Sogang University Logo"
+                  style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
                 <h3>
@@ -531,7 +601,10 @@
 
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img src="https://yt3.googleusercontent.com/nQYzp_uWzBzXCwPcMrRDQuLyVfLGu6ILh3EVYJQ_53re5gcZl3ab9xyLVaJfYppMNfN55uynIQ=s160-c-k-c0x00ffffff-no-rj" alt="ROK Air Force Logo" style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
+                <img
+                  src="https://yt3.googleusercontent.com/nQYzp_uWzBzXCwPcMrRDQuLyVfLGu6ILh3EVYJQ_53re5gcZl3ab9xyLVaJfYppMNfN55uynIQ=s160-c-k-c0x00ffffff-no-rj"
+                  alt="ROK Air Force Logo"
+                  style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
                 <h3>
@@ -546,7 +619,10 @@
 
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img src="https://yt3.googleusercontent.com/ytc/AIdro_kkK4Mo4qlcO9Ej_dqVenZmYPnwZ2e6nh5ZfSvM00eQmQ=s160-c-k-c0x00ffffff-no-rj" alt="Choong-Ang High School Logo" style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
+                <img
+                  src="https://yt3.googleusercontent.com/ytc/AIdro_kkK4Mo4qlcO9Ej_dqVenZmYPnwZ2e6nh5ZfSvM00eQmQ=s160-c-k-c0x00ffffff-no-rj"
+                  alt="Choong-Ang High School Logo"
+                  style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
                 <h3>
@@ -594,7 +670,7 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
       document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      toggleTheme(); 
+      toggleTheme();
     }
 
     function copyEmail() {
@@ -608,4 +684,5 @@
     }
   </script>
 </body>
+
 </html>
