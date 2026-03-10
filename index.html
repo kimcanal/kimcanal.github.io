@@ -552,29 +552,8 @@
 
         <section>
           <h2><span>🚀</span> Projects</h2>
-          <ul class="card-list">
-            <li class="card">
-              <div class="card-title">
-                <a href="https://github.com/kimcanal/yacht-multi-with-suggestions" target="_blank">Yacht Game</a>
-              </div>
-              <div class="card-desc">
-                Web-based multiplayer Yacht dice game with real-time PVP support.
-              </div>
-              <a href="https://app.yatch-game.cloud/" target="_blank" class="play-link">
-                Play now
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
-            </li>
-            <li class="card">
-              <div class="card-title">
-                <a href="https://github.com/kimcanal/Sogang-Univ---Pintos-Project" target="_blank">Pintos Project</a>
-              </div>
-              <div class="card-desc">
-                Pintos project for<br> Operation System(CSE4070) class in Sogang Univ, 2025 <br>(Grade: A-)
-              </div>
-            </li>
+          <ul class="card-list" id="repo-list">
+            <!-- GitHub repositories will be loaded here -->
           </ul>
         </section>
 
@@ -583,9 +562,7 @@
           <ul class="timeline">
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img
-                  src="https://yt3.googleusercontent.com/Z-eSy9ZnimMdAW-pm2Bgz63hXQGmjCaMqyH1IJ7_DpdwV4XJPkRJf3_HXJlhbPplkY7cv672Aw=s160-c-k-c0x00ffffff-no-rj"
-                  alt="Sogang University Logo"
+                <img src="assets/images/sogang.jpg" alt="Sogang University Logo"
                   style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
@@ -601,9 +578,7 @@
 
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img
-                  src="https://yt3.googleusercontent.com/nQYzp_uWzBzXCwPcMrRDQuLyVfLGu6ILh3EVYJQ_53re5gcZl3ab9xyLVaJfYppMNfN55uynIQ=s160-c-k-c0x00ffffff-no-rj"
-                  alt="ROK Air Force Logo"
+                <img src="assets/images/rokaf.jpg" alt="ROK Air Force Logo"
                   style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
@@ -619,9 +594,7 @@
 
             <li class="timeline-item">
               <div class="timeline-marker" style="padding:0;overflow:hidden;">
-                <img
-                  src="https://yt3.googleusercontent.com/ytc/AIdro_kkK4Mo4qlcO9Ej_dqVenZmYPnwZ2e6nh5ZfSvM00eQmQ=s160-c-k-c0x00ffffff-no-rj"
-                  alt="Choong-Ang High School Logo"
+                <img src="assets/images/choongang.jpg" alt="Choong-Ang High School Logo"
                   style="width:2rem;height:2rem;border-radius:50%;object-fit:cover;display:block;">
               </div>
               <div class="timeline-content">
@@ -647,6 +620,40 @@
   <div id="toast">✅ Email copied to clipboard!</div>
 
   <script>
+    // --- GitHub Repo Fetcher ---
+    async function loadRepos() {
+      const repoList = document.getElementById('repo-list');
+      repoList.innerHTML = '<li class="card">Loading repositories...</li>';
+      try {
+        const res = await fetch('https://api.github.com/users/kimcanal/repos?sort=created&direction=asc&per_page=8');
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('No data');
+
+        const content = data
+          .filter(repo => !repo.fork)
+          .map(repo => {
+            const desc = repo.description || '';
+            const homepageLink = repo.homepage
+              ? `<a href="${repo.homepage}" target="_blank" class="play-link">Demo</a>`
+              : '';
+
+            return `
+              <li class="card">
+                <div class="card-title">
+                  <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                </div>
+                <div class="card-desc">${desc}</div>
+                ${homepageLink}
+              </li>
+            `;
+          }).join('');
+
+        repoList.innerHTML = content || '<li class="card">No repositories found.</li>';
+      } catch (e) {
+        repoList.innerHTML = '<li class="card">Failed to load repositories.</li>';
+      }
+    }
+    loadRepos();
     function getTheme() {
       try { return localStorage.getItem('theme'); } catch (e) { return null; }
     }
