@@ -8,8 +8,6 @@ https://kimcanal.github.io
 
 ---
 
-<img width="3390" height="2447" alt="image" src="https://github.com/user-attachments/assets/10dca8bd-71f4-4d7c-a1a5-a628e40f2f6f" />
-
 
 ## About
 
