@@ -811,7 +811,7 @@
     ];
 
     const LANG_COLORS = {
-      C: '#555555', 'C++': '#f34b7d', C#: '#178600', Python: '#3572A5', JavaScript: '#f1e05a',
+      C: '#555555', 'C++': '#f34b7d', 'C#': '#178600', Python: '#3572A5', JavaScript: '#f1e05a',
       TypeScript: '#3178c6', HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051', Java: '#b07219',
       Go: '#00ADD8', Rust: '#dea584', Ruby: '#701516', Swift: '#F05138', Kotlin: '#A97BFF',
       PHP: '#4F5D95', Dockerfile: '#384d54'
@@ -867,7 +867,11 @@
       const repoList = document.getElementById('repo-list');
       repoList.innerHTML = SKELETON_HTML;
       try {
-        const res = await fetch('https://api.github.com/users/kimcanal/repos?sort=pushed&direction=desc&per_page=30');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch('https://api.github.com/users/kimcanal/repos?sort=pushed&direction=desc&per_page=30',
+          { signal: controller.signal });
+        clearTimeout(timeoutId);
         if (!res.ok) throw new Error('GitHub API responded ' + res.status);
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error('Unexpected payload');
