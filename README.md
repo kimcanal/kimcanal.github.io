@@ -36,11 +36,22 @@ No external frameworks or build tools are used.
 
 ---
 
+## Features
+
+* Light / dark mode toggle (remembers preference, follows system setting)
+* Projects loaded dynamically from the GitHub API (stars, language, last updated), with a curated fallback list
+* Email copy-to-clipboard button
+* Responsive layout with a sticky profile sidebar on desktop
+* SEO meta tags, Open Graph tags, and reduced-motion support
+
+---
+
 ## Structure
 
 ```
 .
 ├── index.html        # Main portfolio page
+├── assets/images/    # Logos used in the Experience timeline
 └── README.md         # Repository description
 ```
 
