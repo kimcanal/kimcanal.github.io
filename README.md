@@ -68,9 +68,10 @@ The entire site is implemented in a single HTML file to keep deployment simple.
 
 The site is the source of truth for descriptions and links (kept in sync with the GitHub API for stars/language/last update). Currently featured:
 
+* [Pintos OS Project (CSE4070)](https://github.com/kimcanal/Pintos-Project)
+* [Systems Programming Labs (CSE4100)](https://github.com/kimcanal/SysProgramming)
 * [Yacht Dice — Multiplayer & AI Coach](https://github.com/kimcanal/yacht-multi-with-suggestions) — [play](https://yatch-game.cloud/)
 * [CLUMI UNIVERSE — Café Website](https://github.com/kimcanal/clumiuniverse) — [live](https://clumiuniverse.netlify.app/)
-* [Pintos OS Project (CSE4070)](https://github.com/kimcanal/Pintos-Project)
 * [FastAPI To-Do & CI/CD Pipeline](https://github.com/kimcanal/FASTAPI-TODOs)
 * [Gangnam · Yeoksam Taxi Digital Twin](https://github.com/kimcanal/yeoksam-taxi) — [demo](https://yeoksam-taxi.kenny31.workers.dev/)
 
