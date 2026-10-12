@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -13,43 +13,17 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kimcanal.github.io/">
   <meta property="og:image" content="https://avatars.githubusercontent.com/kimcanal">
-  <meta name="theme-color" content="#f8fafc">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="color-scheme" content="dark">
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233b82f6'/%3E%3Ctext x='50' y='70' font-size='54' font-family='Arial,sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3Ek%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.github.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    // Apply saved / system theme before first paint to avoid a flash of the wrong theme
-    (function () {
-      try {
-        var t = localStorage.getItem('theme');
-        if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
-        if (t) document.documentElement.setAttribute('data-theme', t);
-      } catch (e) { }
-    })();
-  </script>
 
   <style>
     :root {
-      /* Light Mode Variables */
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-transparent: rgba(255, 255, 255, 0.85);
-      --text: #0f172a;
-      --text-secondary: #475569;
-      --border: #e2e8f0;
-      --primary: #3b82f6;
-      --primary-glow: rgba(59, 130, 246, 0.5);
-      --primary-dark: #2563eb;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    [data-theme="dark"] {
-      /* Dark Mode Variables */
       --bg: #0f172a;
       --surface: #1e293b;
       --surface-transparent: rgba(30, 41, 59, 0.85);
@@ -59,6 +33,9 @@
       --primary: #60a5fa;
       --primary-glow: rgba(96, 165, 250, 0.5);
       --primary-dark: #3b82f6;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -90,6 +67,26 @@
       outline: 2px solid var(--primary);
       outline-offset: 2px;
       border-radius: 6px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      z-index: 3000;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      top: 1rem;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -239,11 +236,64 @@
       transform: translateX(4px);
     }
 
+    /* Desktop-only section jump nav, shown next to the sticky profile sidebar */
+    .section-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .section-nav a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.4rem 0.7rem;
+      border-radius: 8px;
+      border-left: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      color: var(--primary);
+      background: var(--surface);
+    }
+
+    .section-nav a.active {
+      color: var(--primary);
+      border-left-color: var(--primary);
+      background: var(--surface);
+    }
+
+    @media (min-width: 768px) {
+      .section-nav {
+        display: flex;
+      }
+    }
+
     .contact-row svg {
       width: 18px;
       height: 18px;
       fill: currentColor;
       opacity: 0.8;
+      flex-shrink: 0;
+    }
+
+    /* solved.ac tier badge (self-coloured SVG, readable in both themes) */
+    .solved-badge {
+      height: 20px;
+      width: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    /* Text label only shows if both badge images fail and the <img> is removed */
+    .solved-badge+span {
+      display: none;
     }
 
     /* Sections */
@@ -274,18 +324,15 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* About Me Link Style */
-    .about-link {
-      color: var(--primary);
-      font-weight: 700;
-      text-decoration: none;
-      transition: var(--transition);
-      border-bottom: 2px solid transparent;
+    /* About Me */
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    .about-link:hover {
-      color: var(--primary-dark);
-      border-bottom-color: var(--primary);
+    .about-text p+p {
+      margin-top: 0.9rem;
     }
 
     /* Interest Chips */
@@ -311,6 +358,37 @@
       border-color: var(--primary);
       color: var(--primary);
       transform: translateY(-2px);
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .skills-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.5rem 1rem;
+      align-items: baseline;
+    }
+
+    .skills-row dt {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .skills-row .chips {
+      margin-top: 0;
+    }
+
+    @media (max-width: 520px) {
+      .skills-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
     }
 
     /* Cards */
@@ -357,12 +435,31 @@
       z-index: 1;
     }
 
+    /* Optional project thumbnail (only rendered when data-thumb is set) */
+    .card-thumb {
+      display: block;
+      width: calc(100% + 3.5rem);
+      margin: -1.75rem -1.75rem 1.25rem;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
     .card-desc {
       color: var(--text-secondary);
       font-size: 0.95rem;
       margin-bottom: 0.75rem;
       flex-grow: 1;
       line-height: 1.6;
+    }
+
+    .card-desc code {
+      font-size: 0.85em;
+      padding: 0.05em 0.3em;
+      border-radius: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
     }
 
     .card-meta {
@@ -404,26 +501,195 @@
       text-decoration: underline;
     }
 
-    /* Skeleton loading */
-    .skeleton {
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-tags .chip {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.6rem;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .projects-more {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .projects-more:hover {
+      color: var(--primary);
+    }
+
+    /* Highlights: plain one-line list */
+    .hl-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .hl-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 0.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .hl-main {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hl-sub,
+    .hl-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .hl-meta {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Proof trigger: looks like the text, with a small muted "view" hint */
+    .proof-trigger {
+      font: inherit;
+      color: inherit;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: zoom-in;
+    }
+
+    .proof-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-left: 0.4rem;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .proof-hint svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .proof-trigger:hover .proof-hint,
+    .proof-trigger:focus-visible .proof-hint {
+      color: var(--primary);
+    }
+
+    /* Desktop hover preview (positioned by JS) */
+    .proof-preview {
+      position: fixed;
+      z-index: 1500;
+      width: 320px;
+      padding: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
       pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
 
-    .skeleton-line {
-      height: 0.9rem;
+    .proof-preview.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .proof-preview img {
+      display: block;
+      width: 100%;
+      height: auto;
       border-radius: 6px;
-      background: linear-gradient(90deg, var(--border) 25%, var(--surface-transparent) 50%, var(--border) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+      background: #fff;
     }
 
-    @keyframes shimmer {
-      0% {
-        background-position: 200% 0;
-      }
+    /* Lightbox */
+    .proof-modal {
+      margin: auto;
+      max-width: min(92vw, 820px);
+      max-height: 90vh;
+      padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
 
-      100% {
-        background-position: -200% 0;
+    .proof-modal::backdrop {
+      background: rgba(2, 6, 23, 0.75);
+    }
+
+    .proof-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 0.6rem 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .proof-close {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .proof-close:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .proof-modal img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(90vh - 54px);
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    @media (max-width: 520px) {
+      .hl-item {
+        flex-direction: column;
+        gap: 0.1rem;
       }
     }
 
@@ -524,31 +790,6 @@
       font-size: 0.95rem;
     }
 
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      z-index: 1000;
-    }
-
-    .theme-toggle:hover {
-      transform: rotate(15deg) scale(1.1);
-      border-color: var(--primary);
-    }
 
     /* Toast */
     #toast {
@@ -628,14 +869,20 @@
     main section:nth-child(3) {
       animation-delay: 0.3s;
     }
+
+    main section:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    main section:nth-child(5) {
+      animation-delay: 0.5s;
+    }
   </style>
 </head>
 
 <body>
 
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode" title="Toggle Theme">
-    <span id="theme-icon">🌙</span>
-  </button>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="container">
     <div class="layout-grid">
@@ -665,6 +912,19 @@
             <span>LinkedIn</span>
           </a>
 
+          <a href="https://solved.ac/profile/kenny31" target="_blank" rel="noopener noreferrer" class="contact-row"
+            title="solved.ac (Baekjoon) profile">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+            </svg>
+            <img src="https://mazassumnida.wtf/api/mini/generate_badge?boj=kenny31"
+              data-fallback="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsolved.ac%2Fapi%2Fv3%2Fuser%2Fshow%3Fhandle%3Dkenny31&amp;query=%24.solvedCount&amp;label=solved.ac&amp;suffix=%20solved&amp;color=3b82f6"
+              alt="solved.ac tier badge for kenny31" class="solved-badge" height="20" loading="lazy"
+              onerror="var f=this.dataset.fallback;if(f){this.removeAttribute('data-fallback');this.src=f}else{this.remove()}">
+            <span>solved.ac</span>
+          </a>
+
           <button class="contact-row" onclick="copyEmail()" title="Click to copy email">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -672,36 +932,223 @@
             </svg>
             <span>kenny31@sogang.ac.kr</span>
           </button>
+
+          <a href="assets/resume.html" target="_blank" rel="noopener" class="contact-row" title="Open resume">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 13h8v2H8v-2zm0 4h8v2H8v-2zm0-8h3v2H8V9z" />
+            </svg>
+            <span>Resume</span>
+          </a>
         </div>
+
+        <nav class="section-nav" aria-label="Section navigation">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#highlights">Highlights</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+        </nav>
       </header>
 
-      <main>
-        <section>
+      <main id="main-content">
+        <section id="about">
           <h2><span aria-hidden="true">👋</span> About Me</h2>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7;">
-            Hi, I'm <a href="https://github.com/kimcanal" target="_blank" rel="noopener noreferrer"
-              class="about-link">kimcanal</a>.<br>
-            I'm interested in system programming, backend development, and building practical services that people can
-            actually use.<br>
-            Currently exploring operating systems, networking, and server-side development.
-          </p>
-          <div class="chips">
-            <span class="chip">Backend</span>
-            <span class="chip">Operating Systems</span>
-            <span class="chip">Networking</span>
-            <span class="chip">C</span>
-            <span class="chip">JavaScript</span>
+          <div class="about-text">
+            <p>
+              I've always liked taking things apart &mdash; PCs, phones, tablets, game consoles &mdash; and putting
+              them back together working. As a kid I flashed custom ROMs with Odin and adb, learning mostly from XDA
+              threads and YouTube; these days I still do things like flashing global ROMs onto China-market tablets.
+              At Sogang University, where I study Computer Science &amp; Engineering, I finally learned what was
+              happening underneath: C, operating systems (Pintos), and systems programming.
+            </p>
+            <p>
+              I don't have one framework I'd call &ldquo;mine&rdquo;; what I do have is a habit of understanding
+              systems from the bottom up. I build full-stack projects with AI coding agents and use my CS fundamentals
+              to check their work &mdash; integration and concurrency tests, CI gates, and evaluating my game's AI
+              against an exact solver. That's how a multiplayer dice game, a caf&eacute;'s ordering site and a FastAPI
+              service went from idea to deployment in weeks rather than months.
+            </p>
+            <p>
+              I also served in the Republic of Korea Air Force as a Special Intelligence specialist. I'm looking for a
+              backend or systems role where I can learn production engineering properly.
+            </p>
           </div>
         </section>
 
-        <section>
-          <h2><span aria-hidden="true">🚀</span> Projects</h2>
-          <ul class="card-list" id="repo-list">
-            <!-- GitHub repositories will be loaded here -->
+        <section id="skills">
+          <h2><span aria-hidden="true">🧰</span> Skills</h2>
+          <dl class="skills-list">
+            <div class="skills-row">
+              <dt>Languages</dt>
+              <dd class="chips">
+                <span class="chip">C</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+              </dd>
+            </div>
+            <div class="skills-row">
+              <dt>Backend &amp; Infra</dt>
+              <dd class="chips">
+                <span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">Netlify Functions</span>
+              </dd>
+            </div>
+            <div class="skills-row">
+              <dt>Frontend</dt>
+              <dd class="chips">
+                <span class="chip">Next.js</span><span class="chip">Three.js</span>
+              </dd>
+            </div>
+            <div class="skills-row">
+              <dt>Systems &amp; Tools</dt>
+              <dd class="chips">
+                <span class="chip">Linux</span><span class="chip">GDB</span><span class="chip">Git</span>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section id="highlights">
+          <h2><span aria-hidden="true">📌</span> Highlights</h2>
+          <ul class="hl-list">
+            <li class="hl-item">
+              <button type="button" class="proof-trigger hl-main" lang="ko" data-proof="assets/proof/skala.webp"
+                data-proof-alt="SKALA 4기 최종 합격 안내 메일" aria-haspopup="dialog"
+                aria-label="SKALA(SK AX 부트캠프) 4기 최종 합격, 2026. 합격 안내 메일 보기">
+                SKALA(SK AX 부트캠프) 4기 최종 합격<span class="proof-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" /></svg>보기</span>
+              </button>
+              <span class="hl-meta">2026</span>
+            </li>
+            <li class="hl-item">
+              <button type="button" class="proof-trigger hl-main" lang="ko" data-proof="assets/proof/kakao.webp"
+                data-proof-alt="카카오테크 부트캠프 AI 실무 개발 과정 최종 합격 안내 메일"
+                aria-haspopup="dialog"
+                aria-label="카카오테크 부트캠프 4기 AI 실무 개발 과정 최종 합격, 2026. 합격 안내 메일 보기">
+                카카오테크 부트캠프 4기 AI 실무 개발 과정 최종 합격<span class="proof-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" /></svg>보기</span>
+              </button>
+              <span class="hl-meta">2026</span>
+            </li>
+            <li class="hl-item">
+              <span class="hl-main">Sogang ICPC Team <span class="hl-sub">&middot; ICPC Asia Seoul Regional online
+                  preliminary (2025.09)</span></span>
+              <span class="hl-meta">2024.06 – present</span>
+            </li>
+            <li class="hl-item">
+              <span class="hl-main">GPA 4.08 / 4.50</span>
+              <span class="hl-meta">Sogang CSE</span>
+            </li>
+            <li class="hl-item">
+              <span class="hl-main">TOEIC 915</span>
+              <span class="hl-meta">2026.03.15</span>
+            </li>
           </ul>
         </section>
 
-        <section>
+        <section id="projects">
+          <h2><span aria-hidden="true">🚀</span> Projects</h2>
+          <!-- Hand-curated featured projects. Set data-thumb="assets/projects/<name>.png" to show a thumbnail.
+               Stars / language / last-updated are enriched from the GitHub API when it is reachable. -->
+          <ul class="card-list" id="repo-list">
+            <li class="card" data-repo="yacht-multi-with-suggestions" data-thumb="">
+              <div class="card-title">
+                <a href="https://github.com/kimcanal/yacht-multi-with-suggestions" target="_blank" rel="noopener noreferrer">Yacht Dice &mdash; Multiplayer &amp; AI Coach</a>
+              </div>
+              <div class="card-desc">Real-time 1:1 multiplayer Yacht with server-authoritative dice (SHA-256
+                commit-reveal), self-hosted via systemd + Cloudflare Tunnel. The DP-based AI coach is tested against an
+                exact solver (200-game A/B avg 175.5 &rarr; 184.6); a Redis state backend is built and benchmarked.</div>
+              <div class="card-tags">
+                <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">JavaScript</span><span class="chip">Cloudflare Tunnel</span>
+              </div>
+              <div class="card-meta">
+                <span class="meta-item"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/kimcanal/yacht-multi-with-suggestions" target="_blank" rel="noopener noreferrer" class="play-link">GitHub ↗</a>
+                <a href="https://yatch-game.cloud/" target="_blank" rel="noopener noreferrer" class="play-link">Play ↗</a>
+              </div>
+            </li>
+
+            <li class="card" data-repo="clumiuniverse" data-thumb="">
+              <div class="card-title">
+                <a href="https://github.com/kimcanal/clumiuniverse" target="_blank" rel="noopener noreferrer">CLUMI UNIVERSE &mdash; Caf&eacute; Website</a>
+              </div>
+              <div class="card-desc">Official site of a Hapjeong dessert caf&eacute;. A daily GitHub Actions job syncs the
+                menu from Toss order data and redeploys only on change; an experimental English pre-order page uses
+                Netlify Functions, Blobs and Web Push staff alerts.</div>
+              <div class="card-tags">
+                <span class="chip">JavaScript</span><span class="chip">GitHub Actions</span><span class="chip">Netlify Functions</span><span class="chip">Web Push</span>
+              </div>
+              <div class="card-meta">
+                <span class="meta-item"><span class="lang-dot" style="background:#e34c26"></span>HTML</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/kimcanal/clumiuniverse" target="_blank" rel="noopener noreferrer" class="play-link">GitHub ↗</a>
+                <a href="https://clumiuniverse.netlify.app/" target="_blank" rel="noopener noreferrer" class="play-link">Live ↗</a>
+              </div>
+            </li>
+
+            <li class="card" data-repo="Pintos-Project" data-thumb="">
+              <div class="card-title">
+                <a href="https://github.com/kimcanal/Pintos-Project" target="_blank" rel="noopener noreferrer">Pintos
+                  OS Project (CSE4070)</a>
+              </div>
+              <div class="card-desc">Sogang University Operating Systems course project (grade A-): argument
+                passing, system calls, process scheduling and virtual memory in C on the Pintos kernel, with kernel
+                panics traced frame-by-frame in GDB.</div>
+              <div class="card-tags">
+                <span class="chip">C</span><span class="chip">x86</span><span class="chip">GDB</span><span class="chip">Operating Systems</span>
+              </div>
+              <div class="card-meta">
+                <span class="meta-item"><span class="lang-dot" style="background:#555555"></span>C</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/kimcanal/Pintos-Project" target="_blank" rel="noopener noreferrer"
+                  class="play-link">GitHub ↗</a>
+              </div>
+            </li>
+
+            <li class="card" data-repo="FASTAPI-TODOs" data-thumb="">
+              <div class="card-title">
+                <a href="https://github.com/kimcanal/FASTAPI-TODOs" target="_blank" rel="noopener noreferrer">FastAPI To-Do &amp; CI/CD Pipeline</a>
+              </div>
+              <div class="card-desc">To-do app (FastAPI + SQLite) whose Jenkins pipeline deploys only after pytest and a
+                SonarQube quality gate pass; Playwright and API tests check the live app. Docker healthcheck, OWASP Top
+                10 self-review.</div>
+              <div class="card-tags">
+                <span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">SonarQube</span><span class="chip">Playwright</span>
+              </div>
+              <div class="card-meta">
+                <span class="meta-item"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/kimcanal/FASTAPI-TODOs" target="_blank" rel="noopener noreferrer" class="play-link">GitHub ↗</a>
+              </div>
+            </li>
+
+            <li class="card" data-repo="yeoksam-taxi" data-thumb="">
+              <div class="card-title">
+                <a href="https://github.com/kimcanal/yeoksam-taxi" target="_blank" rel="noopener noreferrer">Gangnam
+                  &middot; Yeoksam Taxi Digital Twin</a>
+              </div>
+              <div class="card-desc">Kakao Mobility capstone project: a web digital twin that shows hourly taxi demand,
+                a supply proxy, shortage heatmaps and incentive suggestions on a 3D OpenStreetMap city map.</div>
+              <div class="card-tags">
+                <span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">Three.js</span><span class="chip">React Three Fiber</span>
+              </div>
+              <div class="card-meta">
+                <span class="meta-item"><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/kimcanal/yeoksam-taxi" target="_blank" rel="noopener noreferrer"
+                  class="play-link">GitHub ↗</a>
+                <a href="https://yeoksam-taxi.kenny31.workers.dev/" target="_blank" rel="noopener noreferrer"
+                  class="play-link">Demo ↗</a>
+              </div>
+            </li>
+          </ul>
+          <a href="https://github.com/kimcanal?tab=repositories" target="_blank" rel="noopener noreferrer"
+            class="projects-more">All repositories on GitHub →</a>
+        </section>
+
+        <section id="experience">
           <h2><span aria-hidden="true">💼</span> Experience</h2>
           <ul class="timeline">
             <li class="timeline-item">
@@ -718,7 +1165,7 @@
                   </a>
                 </h3>
                 <div class="timeline-period">2021.03 – Present</div>
-                <div class="timeline-desc">Computer Science &amp; Engineering</div>
+                <div class="timeline-desc">Computer Science &amp; Engineering · Expected graduation 2027.02</div>
               </div>
             </li>
 
@@ -736,7 +1183,7 @@
                   </a>
                 </h3>
                 <div class="timeline-period">2022.04 – 2024.01</div>
-                <div class="timeline-desc">Special Intelligence Specialist, Sergeant</div>
+                <div class="timeline-desc">Special Intelligence Specialist · Sergeant, honorably discharged</div>
               </div>
             </li>
 
@@ -767,49 +1214,43 @@
     </div>
   </div>
 
+  <div class="proof-preview" id="proof-preview" aria-hidden="true"></div>
+
+  <dialog class="proof-modal" id="proof-modal" aria-labelledby="proof-modal-title">
+    <div class="proof-modal-bar">
+      <span id="proof-modal-title"></span>
+      <button type="button" class="proof-close" aria-label="Close">&times;</button>
+    </div>
+  </dialog>
+
   <div id="toast" role="status" aria-live="polite">✅ Email copied to clipboard!</div>
 
   <script>
-    // --- Theme ---
-    function syncThemeIcon() {
-      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      document.getElementById('theme-icon').textContent = dark ? '☀️' : '🌙';
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', dark ? '#0f172a' : '#f8fafc');
-    }
-
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) { }
-      syncThemeIcon();
-    }
-    syncThemeIcon();
-
     // --- Dynamic footer year ---
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // --- GitHub Repo Fetcher ---
-    // Curated fallback so the section never looks broken if the API is unavailable / rate-limited
-    const FALLBACK_REPOS = [
-      {
-        name: 'yacht-multi-with-suggestions',
-        description: 'Web-based multiplayer yacht dice game with real-time interaction.',
-        html_url: 'https://github.com/kimcanal/yacht-multi-with-suggestions',
-        homepage: 'https://app.yatch-game.cloud/',
-        language: 'JavaScript',
-        stargazers_count: 0
-      },
-      {
-        name: 'Sogang-Univ---Pintos-Project',
-        description: 'Operating Systems project (CSE4070) at Sogang University — implemented core Pintos OS components. Grade: A-.',
-        html_url: 'https://github.com/kimcanal/Sogang-Univ---Pintos-Project',
-        language: 'C',
-        stargazers_count: 0
-      }
-    ];
+    // --- Section nav: highlight the link for the section currently in view ---
+    (function () {
+      const navLinks = document.querySelectorAll('.section-nav a');
+      if (!navLinks.length) return;
+      const sections = Array.from(navLinks)
+        .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+        .filter(Boolean);
 
+      const setActive = id => {
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      };
+
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length) setActive(visible[0].target.id);
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    // --- Featured projects ---
+    // Cards are hand-curated in the HTML; the GitHub API only enriches language / stars / last update.
     const LANG_COLORS = {
       C: '#555555', 'C++': '#f34b7d', 'C#': '#178600', Python: '#3572A5', JavaScript: '#f1e05a',
       TypeScript: '#3178c6', HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051', Java: '#b07219',
@@ -836,59 +1277,98 @@
       return 'just now';
     }
 
-    function repoCard(repo) {
-      const lang = repo.language || '';
-      const color = LANG_COLORS[lang] || '#8b949e';
-      const homepage = repo.homepage || '';
-      return `
-        <li class="card">
-          <div class="card-title">
-            <a href="${escapeHTML(repo.html_url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(repo.name)}</a>
-          </div>
-          <div class="card-desc">${escapeHTML(repo.description || '')}</div>
-          <div class="card-meta">
-            ${lang ? `<span class="meta-item"><span class="lang-dot" style="background:${color}"></span>${escapeHTML(lang)}</span>` : ''}
-            <span class="meta-item" title="Stars">★ ${repo.stargazers_count || 0}</span>
-            ${repo.pushed_at ? `<span class="meta-item" title="Last updated">🕒 ${timeAgo(repo.pushed_at)}</span>` : ''}
-          </div>
-          ${homepage ? `<a href="${escapeHTML(homepage)}" target="_blank" rel="noopener noreferrer" class="play-link">Demo ↗</a>` : ''}
-        </li>`;
-    }
+    // Optional thumbnails: only rendered when data-thumb is set (and removed again if the file is missing)
+    document.querySelectorAll('#repo-list .card[data-thumb]').forEach(card => {
+      const src = card.dataset.thumb.trim();
+      if (!src) return;
+      const img = document.createElement('img');
+      img.className = 'card-thumb';
+      img.src = src;
+      img.alt = card.querySelector('.card-title').textContent.trim() + ' screenshot';
+      img.loading = 'lazy';
+      img.onerror = () => img.remove();
+      card.prepend(img);
+    });
 
-    const SKELETON_HTML = Array(3).fill(`
-      <li class="card skeleton">
-        <div class="skeleton-line" style="width:55%;height:1.15rem;margin-bottom:1rem"></div>
-        <div class="skeleton-line" style="width:100%;margin-bottom:0.5rem"></div>
-        <div class="skeleton-line" style="width:88%;margin-bottom:1.5rem"></div>
-        <div class="skeleton-line" style="width:45%"></div>
-      </li>`).join('');
-
-    async function loadRepos() {
-      const repoList = document.getElementById('repo-list');
-      repoList.innerHTML = SKELETON_HTML;
+    async function enrichRepos() {
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch('https://api.github.com/users/kimcanal/repos?sort=pushed&direction=desc&per_page=30',
+        const res = await fetch('https://api.github.com/users/kimcanal/repos?per_page=100',
           { signal: controller.signal });
         clearTimeout(timeoutId);
         if (!res.ok) throw new Error('GitHub API responded ' + res.status);
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error('Unexpected payload');
+        const byName = new Map(data.map(r => [r.name.toLowerCase(), r]));
 
-        const repos = data
-          .filter(r => !r.fork && r.size > 0 && r.name !== 'kimcanal.github.io')
-          .sort((a, b) => (b.stargazers_count - a.stargazers_count) ||
-            (new Date(b.pushed_at) - new Date(a.pushed_at)))
-          .slice(0, 6);
-
-        if (!repos.length) throw new Error('No repositories');
-        repoList.innerHTML = repos.map(repoCard).join('');
+        document.querySelectorAll('#repo-list .card[data-repo]').forEach(card => {
+          const repo = byName.get(card.dataset.repo.toLowerCase());
+          if (!repo) return;
+          const lang = repo.language || '';
+          const color = LANG_COLORS[lang] || '#8b949e';
+          card.querySelector('.card-meta').innerHTML = `
+            ${lang ? `<span class="meta-item"><span class="lang-dot" style="background:${color}"></span>${escapeHTML(lang)}</span>` : ''}
+            <span class="meta-item" title="Stars">★ ${repo.stargazers_count || 0}</span>
+            ${repo.pushed_at ? `<span class="meta-item" title="Last updated">🕒 ${timeAgo(repo.pushed_at)}</span>` : ''}`;
+        });
       } catch (e) {
-        repoList.innerHTML = FALLBACK_REPOS.map(repoCard).join('');
+        // Keep the static language info already in the markup
       }
     }
-    loadRepos();
+    enrichRepos();
+
+    // --- Highlights: proof preview (hover) + lightbox (click / tap) ---
+    // Images are only requested on first hover / click, so they don't affect initial page load.
+    (function () {
+      const preview = document.getElementById('proof-preview');
+      const previewImg = preview.appendChild(document.createElement('img'));
+      const modal = document.getElementById('proof-modal');
+      const modalImg = modal.appendChild(document.createElement('img'));
+      const modalTitle = document.getElementById('proof-modal-title');
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+      let lastTrigger = null;
+
+      function placePreview(trigger) {
+        const r = trigger.getBoundingClientRect();
+        const w = preview.offsetWidth, h = preview.offsetHeight, gap = 10;
+        const left = Math.max(8, Math.min(r.left, window.innerWidth - w - 8));
+        const top = (r.bottom + gap + h <= window.innerHeight) ? r.bottom + gap : Math.max(8, r.top - gap - h);
+        preview.style.left = left + 'px';
+        preview.style.top = top + 'px';
+      }
+
+      function showPreview(trigger) {
+        if (!canHover.matches || modal.open) return;
+        previewImg.alt = trigger.dataset.proofAlt;
+        if (previewImg.getAttribute('src') !== trigger.dataset.proof) previewImg.src = trigger.dataset.proof;
+        placePreview(trigger);
+        if (!previewImg.complete) previewImg.onload = () => placePreview(trigger);
+        preview.classList.add('show');
+      }
+
+      function hidePreview() { preview.classList.remove('show'); }
+
+      document.querySelectorAll('.proof-trigger').forEach(trigger => {
+        trigger.addEventListener('mouseenter', () => showPreview(trigger));
+        trigger.addEventListener('mouseleave', hidePreview);
+        trigger.addEventListener('blur', hidePreview);
+        trigger.addEventListener('click', () => {
+          hidePreview();
+          lastTrigger = trigger;
+          modalImg.src = trigger.dataset.proof;
+          modalImg.alt = trigger.dataset.proofAlt;
+          modalTitle.textContent = trigger.dataset.proofAlt;
+          modal.showModal();
+        });
+      });
+
+      // <dialog> handles Esc natively; also close via the button or a click on the backdrop
+      modal.querySelector('.proof-close').addEventListener('click', () => modal.close());
+      modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+      modal.addEventListener('close', () => { if (lastTrigger) lastTrigger.focus(); });
+      window.addEventListener('scroll', hidePreview, { passive: true });
+    })();
 
     // --- Copy email ---
     function copyEmail() {

@@ -38,11 +38,13 @@ No external frameworks or build tools are used.
 
 ## Features
 
-* Light / dark mode toggle (remembers preference, follows system setting)
-* Projects loaded dynamically from the GitHub API (stars, language, last updated), with a curated fallback list
+* Dark theme
+* Hand-curated featured projects (optional thumbnails), enriched with stars / language / last update from the GitHub API when available
+* Resume link and solved.ac profile badge in the sidebar
 * Email copy-to-clipboard button
 * Responsive layout with a sticky profile sidebar on desktop
 * SEO meta tags, Open Graph tags, and reduced-motion support
+* Skip-to-content link, visible keyboard focus states, and `lang` tagging on mixed Korean/English text
 
 ---
 
@@ -52,6 +54,9 @@ No external frameworks or build tools are used.
 .
 ├── index.html        # Main portfolio page
 ├── assets/images/    # Logos used in the Experience timeline
+├── assets/projects/  # (optional) project thumbnails
+├── assets/proof/     # Bootcamp acceptance email screenshots shown on hover/click in Highlights
+├── assets/resume.html # Resume page linked from the sidebar (has its own print button)
 └── README.md         # Repository description
 ```
 
@@ -61,27 +66,13 @@ The entire site is implemented in a single HTML file to keep deployment simple.
 
 ## Featured Projects
 
-### Yacht Multiplayer Game
+The site is the source of truth for descriptions and links (kept in sync with the GitHub API for stars/language/last update). Currently featured:
 
-Web-based multiplayer yacht dice game with real-time interaction.
-
-GitHub
-https://github.com/kimcanal/yacht-multi-with-suggestions
-
-Play
-https://app.yatch-game.cloud/
-
----
-
-### Pintos Operating System Project
-
-Operating Systems project completed at **Sogang University (CSE4070)**.
-
-* Implemented core Pintos OS components
-* Grade: **A-**
-
-GitHub
-https://github.com/kimcanal/Sogang-Univ---Pintos-Project
+* [Yacht Dice — Multiplayer & AI Coach](https://github.com/kimcanal/yacht-multi-with-suggestions) — [play](https://yatch-game.cloud/)
+* [CLUMI UNIVERSE — Café Website](https://github.com/kimcanal/clumiuniverse) — [live](https://clumiuniverse.netlify.app/)
+* [Pintos OS Project (CSE4070)](https://github.com/kimcanal/Pintos-Project)
+* [FastAPI To-Do & CI/CD Pipeline](https://github.com/kimcanal/FASTAPI-TODOs)
+* [Gangnam · Yeoksam Taxi Digital Twin](https://github.com/kimcanal/yeoksam-taxi) — [demo](https://yeoksam-taxi.kenny31.workers.dev/)
 
 ---
 
