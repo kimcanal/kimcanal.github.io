@@ -85,6 +85,9 @@ The site is the source of truth for descriptions and links (kept in sync with th
 * LinkedIn
   https://www.linkedin.com/in/kimcanal
 
+* Velog
+  https://velog.io/@kimcanal/
+
 * Email
   [kenny31@sogang.ac.kr](mailto:kenny31@sogang.ac.kr)
 
